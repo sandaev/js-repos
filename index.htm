@@ -4,10 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f73dc75a1c.js" crossorigin="anonymous"></script>
     <script  src="script.js"></script>
     <title>Rock-Scissors-Paper</title>
 </head>
 <body>
-    
+    <h1>Rock Paper Scissors</h1>
+<!-- THE CONTAINER-->
+<div class="container">
+
+<!-- PLAYER SECTION-->
+    <div class="section-one">
+        <div class="info">
+            <h4>You: </h4><span id="playerScore">0</span>
+        </div>
+        <div class="show">
+            <i class="fas fa-hand-rock"></i>
+        </div>
+    </div>
+<!--        COMPUTER SECTION      -->
+    <div class="section-two">
+        <div class="info">
+            <h4>Computer:</h4><span id="computerScore">0</span>
+        </div>
+        <div class="show-cpmuter">
+            <i class="fas fa-hand-scissors"></i>
+        </div>
+    </div>
+</div>
+<h2 id="instruction2">Select your move !</h2>
+<!--        BUTTONS SECTION     -->
+<div class="select-buttons">
+    <button class="fas fa-hand-rock" id="rock"></button>
+    <button class="fas fa-hand-paper" id="paper"></button>
+    <button class="fas fa-hand-scissors" id="scissors"></button>
+</div>
 </body>
 </html>
