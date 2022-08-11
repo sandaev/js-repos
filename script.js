@@ -1,92 +1,110 @@
-//ROCK-SCISSORS-PAPER- CONSOLE GAME
-let cpScore = 0;
+//DECLARE CONSTANT VARIABLES TO REFERENCE DOM ELEMENTS
+
+const message = document.querySelector('.message');
+const playerScoreDom = document.querySelector('#playerScore');
+const playerIconDom = document.querySelector('.show-player i');
+const computerScoreDom = document.querySelector('#computerScore');
+const computerIconDom = document.querySelector('.show-computer i');
+const instruction = document.querySelector('#instruction');
+const buttons = document.querySelectorAll('button');
+
+//AVAILABLE SELECTIONS
+const iconList = ['fas fa-hand-rock', 'fas fa-hand-paper', 'fas fa-hand-scissors'];
+
+//OTHER VARIABLES
 let playerScore = 0;
-let message;
-let gameState = false;
-//let pChoice = prompt("Your choice: (Rock, Scissors, Paper)");
-//playerChoice = prompt("Your choice:","Rock, Scissors or Paper?");
-//let cpOptions = ["Rock", "Scissors", "Paper"];
-
-function computerChoice () {
-    let cpOptions = ["Rock", "Scissors", "Paper"];
-    let cpChoice;
-    cpChoice = cpOptions[Math.floor(Math.random()*cpOptions.length)];
-    return cpChoice;
-};
+let computerScore = 0;
+let round = 0;
 
 
-function gameLogic(playerChoice, computer) {
-    if(playerChoice.toLowerCase() == "rock" && computer == "Scissors" ){
-        message = "You win! Rock breaks scissors";
-        ++playerScore;
-        console.log(message);
-        //console.log(playerScore);
+
+ for(let i = 0; i<buttons.length; i++){
+    buttons[i].addEventListener('click', () =>{
+        //Set computer icon 
+        let computerIcon = iconList[Math.floor(Math.random()*iconList.length)];
+        computerIconDom.className = computerIcon;
+
+        //Player move
+        playerIconDom.className = buttons[i].className;
         
-    }
-    if(playerChoice.toLowerCase() == "scissors" && computer == "Rock") {
-        message = "Computer wins! Rock breaks scissors";
-        ++cpScore;
-        console.log(message);
-        //console.log(cpScore);
-    }
-    if(playerChoice.toLowerCase() == "rock" && computer == "Paper"){
-        message = "Computer wins! Paper covers rock";
-        ++cpScore;
-        console.log(message);
-        //console.log(cpScore);
+        //SCORE GAME
+        //draw
+        if(playerIconDom.className === computerIconDom.className){
+            round+=1;
+            instruction.textContent = `Round: ${round}`;
+            message.textContent = `Draw!`
 
-    }
-    if(playerChoice.toLowerCase() == "paper" && computer == "Rock") {
-        message = "You win Paper covers rock";
-        ++playerScore;
-        console.log(message);
-        //console.log(playerScore);
-    }
-    if(playerChoice.toLowerCase() == "scissors" && computer == "Paper") {
-        message = "You win! Scissors cuts paper";
-        ++playerScore;
-        console.log(message);
-        //console.log(playerScore);
-    }
-    if(playerChoice.toLowerCase() == "paper" && computer == "Scissors") {
-        message = "Computer wins! Scissors cuts paper";
-        ++cpScore;
-        console.log(message);
-        //console.log(cpScore);
-    }
-    if(playerChoice.toLowerCase() == computer.toLowerCase()){
-        message = "Draw!!";
-        console.log(message);
-    }
+        }
+
+        if(playerIconDom.className === iconList[0] && computerIconDom.className === iconList[1]){
+            round+=1;
+            computerScore+=1;
+            computerScoreDom.textContent = computerScore;
+            instruction.textContent = `Round: ${round}`;
+            message.textContent = `Computer wins! Paper covers rock!!`;
+
+
+        }
+
+        if(playerIconDom.className === iconList[1] && computerIcon === iconList[0]){
+            round+=1;
+            playerScore+=1;
+            playerScoreDom.textContent = playerScore;
+            message.textContent = `You win! Paper covers rock!!`;
+            instruction.textContent =  `Round: ${round}`;
+        }
+
+        if(playerIconDom.className === iconList[1] && computerIconDom.className === iconList[2]){
+            round+=1;
+            computerScore+=1;
+            computerScoreDom.textContent = computerScore;
+            message.textContent = "Computer wins! Scissors cuts paper!!";
+            instruction.textContent = `Round: ${round}`;
+
+        }
+
+        if(playerIconDom.className === iconList[2] && computerIconDom.className === iconList[1]){
+            round+=1;
+            playerScore+=1;
+            playerScoreDom.textContent = playerScore;
+            message.textContent = "You win! Scissors cuts paper!!";
+            instruction.textContent = `Round: ${round}`;
+
+        }
+
+        if(playerIconDom.className === iconList[0] && computerIconDom.className === iconList[2]){
+            round+=1;
+            playerScore+=1;
+            playerScoreDom.textContent = playerScore;
+            message.textContent = "You win! Rock breaks scissors!!";
+            instruction.textContent = `Round ${round}`;
+
+        }
+
+        if(playerIconDom.className === iconList[2] && computerIconDom.className === iconList[0]){
+            round+=1;
+            computerScore+=1;
+            computerScoreDom.textContent = computerScore;
+            message.textContent = "Computer wins! Rock breaks scissors!!";
+            instruction.textContent =   `Round ${round}`;
+        }
+
+       if(round === 5){
+            instruction.textContent = "Game Over!!!";
+            round =0;
+            computerScore>playerScore? message.textContent = "Computer wins!!!": message.textContent ="You win!!";
+            computerScore=0;
+            computerScoreDom.textContent = "0";
+            playerScore = 0;
+            playerScoreDom.textContent = "0";
+            
+        }
+
+    })
 
 }
 
-let options = ["rock", "scissors", "paper"];
-
-for (let i = 1; i <= 3; i++){
-    playerChoice = prompt("Your choice:","(Rock, Paper or Scissor)");
-    
-    if(playerChoice == null){
-        console.log("Goodbye...");
-        break;
-    }
-    else if (options.includes(playerChoice.toLowerCase())){
-        gameLogic(playerChoice, computerChoice());
-    } 
-    else{
-        console.log("Wrong input!!");
-    }
-
-}
 
 
-if(cpScore > playerScore){
-    console.log("Computer wins!!");
-    console.log("Computer total Score: "+cpScore+"\nYour total score: "+playerScore);
 
-}
-else{
-    console.log("You win!!");
-    console.log("Your total Score: "+playerScore+"\nComputer's total score: "+cpScore);
-}
 
