@@ -89,10 +89,11 @@ let round = 0;
             instruction.textContent =   `Round ${round}`;
         }
 
-       if(round === 5){
+       if(round > 5){
             instruction.textContent = "Game Over!!!";
             round =0;
-            computerScore>playerScore? message.textContent = "Computer wins!!!": message.textContent ="You win!!";
+            computerScore === playerScore? message.textContent = "Its a draw!!!":
+            computerScore > playerScore? message.textContent ="Computer wins!!": message.textContent = "You win!!";
             computerScore=0;
             computerScoreDom.textContent = "0";
             playerScore = 0;
